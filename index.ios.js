@@ -14,6 +14,7 @@ import {
   View,
   SegmentedControlIOS,
   Switch,
+  MapView,
 } from 'react-native';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
@@ -32,34 +33,20 @@ export default class simpleMap extends Component {
       <View style={styles.container}>
         <SegmentedControlIOS
           values={['Map', 'Other']}
-          style={{
-            marginHorizontal: 16,
-          }}
+          style={styles.segmentedControl}
           selectedIndex={this.state.selectedIndex}
           onChange={(event) => {
             this.setState({ selectedIndex: event.nativeEvent.selectedSegmentIndex });
           }}
         />
-        <View style={{
-          paddingHorizontal: 16,
-          paddingVertical: 8,
-          flexDirection: "row",
-          alignItems: "center",
-          alignSelf: "center",
-        }}>
+        <View style={styles.switchContainer}>
           <Text>Animate</Text>
           <Switch
             onValueChange={(value) => this.setState({ animate: value })}
             value={this.state.animate}
           />
         </View>
-        <View style={{
-          paddingHorizontal: 16,
-          paddingVertical: 8,
-          flexDirection: "row",
-          alignItems: "center",
-          alignSelf: "center",
-        }}>
+        <View style={styles.switchContainer}>
           <Text>Draggable</Text>
           <Switch
             onValueChange={(value) => this.setState({ draggable: value })}
@@ -73,13 +60,12 @@ export default class simpleMap extends Component {
           locked={!this.state.draggable}
           prerenderingSiblingsNumber={Infinity}
         >
-          <View
+          <MapView
             key="view1"
             style={{
               flex: 1,
-              backgroundColor: "blue",
             }}
-          ></View>
+          />
           <View
             key="view2"
             style={{
@@ -98,6 +84,17 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 24,
   },
+  segmentedControl: {
+    marginHorizontal: 16,
+  },
+  switchContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "center",
+  },
+
 });
 
 AppRegistry.registerComponent('simpleMap', () => simpleMap);
