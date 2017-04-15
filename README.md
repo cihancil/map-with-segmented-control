@@ -1,0 +1,1 @@
+![](https://github.com/cihancil/map-with-segmented-control/blob/master/map_with_segmented_control.gif)
